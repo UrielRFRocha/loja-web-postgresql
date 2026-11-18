@@ -1,0 +1,10 @@
+
+# Ignorar todos os arquivos por padrao
+**
+
+# Permitir o Dockerfile
+!Dockerfile
+
+# Permitir o arquivo WAR gerado pelo Maven
+!target/
+!target/loja-web-sessao.war

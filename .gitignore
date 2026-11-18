@@ -1,0 +1,16 @@
+
+# Arquivos gerados pelo Maven
+target/
+
+# Configuracoes locais do VS Code
+.vscode/
+
+# Arquivos temporarios
+*.log
+.DS_Store
+Thumbs.db
+
+# Arquivos de ambiente
+.env
+.env.*
+!.env.example
