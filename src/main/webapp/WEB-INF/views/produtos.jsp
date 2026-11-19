@@ -1,127 +1,118 @@
-
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="pt_BR" />
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+            <fmt:setLocale value="pt_BR" />
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos - Loja Web</title>
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/assets/css/style.css">
-</head>
-<body>
+            <!DOCTYPE html>
+            <html lang="pt-BR">
 
-<header class="topo">
-    <div class="container topo-conteudo">
-        <div>
-            <h1>Loja Web</h1>
-        </div>
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Produtos - Loja Web</title>
+                <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+            </head>
 
-        <nav class="menu">
-            <a href="${pageContext.request.contextPath}/">Início</a>
+            <body>
 
-            <a class="ativo"
-               href="${pageContext.request.contextPath}/produtos">
-                Produtos
-            </a>
+                <header class="topo">
+                    <div class="container topo-conteudo">
+                        <div>
+                            <h1>Loja Web</h1>
+                        </div>
 
-            <a href="${pageContext.request.contextPath}/carrinho">
-                Carrinho
-                <span class="contador">${quantidadeTotal}</span>
-            </a>
-        </nav>
+                        <nav class="menu">
+                            <a href="${pageContext.request.contextPath}/">Início</a>
 
-        <!-- Usuário autenticado ou botão Entrar -->
-        <div class="usuario-logado">
-            <c:choose>
-                <c:when test="${not empty sessionScope.usuarioLogado}">
-                    <span>
-                        Olá,
-                        <c:out value="${sessionScope.usuarioLogado.nome}" />!
-                    </span>
+                            <a class="ativo" href="${pageContext.request.contextPath}/produtos">
+                                Produtos
+                            </a>
 
-                    <form action="${pageContext.request.contextPath}/logout"
-                          method="post">
-                        <button type="submit" class="btn btn-contorno">
-                            Sair
-                        </button>
-                    </form>
-                </c:when>
+                            <a href="${pageContext.request.contextPath}/carrinho">
+                                Carrinho
+                                <span class="contador">${quantidadeTotal}</span>
+                            </a>
+                        </nav>
 
-                <c:otherwise>
-                    <a href="${pageContext.request.contextPath}/login"
-                       class="btn btn-contorno">
-                        Entrar
-                    </a>
-                </c:otherwise>
-            </c:choose>
-        </div>
-    </div>
-</header>
+                        <!-- Usuário autenticado ou botão Entrar -->
+                        <div class="usuario-logado">
+                            <c:choose>
+                                <c:when test="${not empty sessionScope.usuarioLogado}">
+                                    <span>
+                                        Olá,
+                                        <c:out value="${sessionScope.usuarioLogado.nome}" />!
+                                    </span>
 
-<main class="container secao">
+                                    <form action="${pageContext.request.contextPath}/logout" method="post">
+                                        <button type="submit" class="btn btn-contorno">
+                                            Sair
+                                        </button>
+                                    </form>
+                                </c:when>
 
-    <div class="titulo-pagina">
-        <div>
-            <h2>Produtos</h2>
-            <p>Escolha seus produtos e adicione ao carrinho.</p>
-        </div>
-    </div>
+                                <c:otherwise>
+                                    <a href="${pageContext.request.contextPath}/login" class="btn btn-contorno">
+                                        Entrar
+                                    </a>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                    </div>
+                </header>
 
-    <div class="grade-produtos">
+                <main class="container secao">
 
-        <c:forEach var="produto" items="${produtos}">
+                    <div class="titulo-pagina">
+                        <div>
+                            <h2>Produtos</h2>
+                            <p>Escolha seus produtos e adicione ao carrinho.</p>
+                        </div>
+                    </div>
 
-            <article class="produto-card">
+                    <div class="grade-produtos">
 
-                <div class="produto-icone">🛍️</div>
+                        <c:forEach var="produto" items="${produtos}">
 
-                <h3>
-                    <c:out value="${produto.nome}" />
-                </h3>
+                            <article class="produto-card">
 
-                <p class="produto-descricao">
-                    <c:out value="${produto.descricao}" />
-                </p>
+                                <div class="produto-icone">🛍️</div>
 
-                <strong class="preco">
-                    <fmt:formatNumber
-                        value="${produto.preco}"
-                        type="currency"
-                        currencySymbol="R$" />
-                </strong>
+                                <h3>
+                                    <c:out value="${produto.nome}" />
+                                </h3>
 
-                <form action="${pageContext.request.contextPath}/carrinho/itens"
-                      method="post">
+                                <p class="produto-descricao">
+                                    <c:out value="${produto.descricao}" />
+                                </p>
 
-                    <input type="hidden"
-                           name="id"
-                           value="${produto.id}">
+                                <strong class="preco">
+                                    <fmt:formatNumber value="${produto.preco}" type="currency" currencySymbol="R$" />
+                                </strong>
 
-                    <button class="btn btn-primario btn-bloco"
-                            type="submit">
-                        Adicionar ao carrinho
-                    </button>
+                                <form action="${pageContext.request.contextPath}/carrinho/itens" method="post">
 
-                </form>
+                                    <input type="hidden" name="id" value="${produto.id}">
 
-            </article>
+                                    <button class="btn btn-primario btn-bloco" type="submit">
+                                        Adicionar ao carrinho
+                                    </button>
 
-        </c:forEach>
+                                </form>
 
-    </div>
+                            </article>
 
-</main>
+                        </c:forEach>
 
-<footer>
-    <div class="container">
-        Programação para Web I
-    </div>
-</footer>
+                    </div>
 
-</body>
-</html>
+                </main>
+
+                <footer>
+                    <div class="container">
+                        Programação para Web I
+                    </div>
+                </footer>
+
+            </body>
+
+            </html>
